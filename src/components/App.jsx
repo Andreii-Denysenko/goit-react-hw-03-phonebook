@@ -34,31 +34,34 @@ export class App extends Component {
   filtredContacts = () => {
     const { filter, contacts } = this.state;
     const toLowerCaseFilter = filter.toLowerCase();
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(toLowerCaseFilter)
+    return contacts.filter(({ name }) => name.toLowerCase().includes(toLowerCaseFilter)
     );
   };
 
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
-  
+
   componentDidMount() {
     // Забираем значение из Хранилища ( это будет строка )
     const contacts = localStorage.getItem('contacts');
     // нужно распарсить что бы получить массив
     const parsedContacts = JSON.parse(contacts);
-    // записываем с стейт значение из Хранилища
-    this.setState({ contacts: parsedContacts })
+    // записываем с стейт значение из Хранилища если такие есть!
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+    
   };
 
 componentDidUpdate(prevProps, prevState) {
   if (this.state.contacts !== prevState.contacts){
     localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
   }
-}
+};
 
   render() {
+    
     const addContact = this.addContact;
     const changeFilter = this.changeFilter;
     const deleteContact = this.deleteContact;

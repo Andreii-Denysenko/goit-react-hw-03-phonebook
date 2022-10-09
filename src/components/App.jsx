@@ -20,7 +20,7 @@ export class App extends Component {
   addContact = ({ name, number }) => {
     const newContacts = { id: nanoid(), name, number };
     const { contacts } = this.state;
-    contacts.find(data => data.name === name) ? alert(`${name} is already in contacts`) : this.setState(({ contacts }) => ({
+    contacts.find(data => data.name.toLocaleLowerCase() === name.toLocaleLowerCase()) ? alert(`${name} is already in contacts`) : this.setState(({ contacts }) => ({
           contacts: [newContacts, ...contacts],
         }));
   };

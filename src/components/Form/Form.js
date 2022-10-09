@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Label, Box, Value, Button } from './Form.styled'
 
 export class Form extends Component {
@@ -62,5 +63,7 @@ export class Form extends Component {
   }
 }
 
-
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
